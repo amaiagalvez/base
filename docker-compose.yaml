@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  base-composer:
+    image: webdevops/php-apache-dev:${DC_PHP:-8.0}
+    profiles: [ "composer" ]
+    volumes:
+      - ./:/app
+      - ${HOME}/Dokumentuak/Packages:/packages
+      - ${HOME}/Dokumentuak/dc-data/home:/home/application
+    working_dir: /app
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
+    command: bash -c " rm -Rf vendor && rm -f composer.lock && composer install && chown -R ${DC_UID:-1000}:${DC_GID:-1000} vendor && chown ${DC_UID:-1000}:${DC_GID:-1000} composer.lock"
+    networks:
+      - frontend
+
+  base-npm:
+    image: node:${DC_NODE:-17-bullseye}
+    profiles: [ "npm" ]
+    volumes:
+      - ./:/app
+      - ${HOME}/Dokumentuak/Packages:/packages
+      - ${HOME}/Dokumentuak/dc-data/home:/home/application
+    working_dir: /app
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
+    command: bash -c "rm -f package-lock.json && rm -rf public/css && rm -rf public/js && npm install && npm run prod && chown -R ${DC_UID:-1000}:${DC_GID:-1000} node_modules && chown ${DC_UID:-1000}:${DC_GID:-1000} package-lock.json"
+    networks:
+      - frontend
+
+  base-npmdev:
+    image: node:${DC_NODE:-17-bullseye}
+    profiles: [ "npm" ]
+    volumes:
+      - ./:/app
+      - ${HOME}/Dokumentuak/Packages:/packages
+      - ${HOME}/Dokumentuak/dc-data/home:/home/application
+    working_dir: /app
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
+    command: bash -c "rm -rf public/css && rm -rf public/js && npm run dev"
+    networks:
+      - frontend
+
+networks:
+  frontend: null
