@@ -1,0 +1,7 @@
+@include('app.blade.php')
+
+@section('title', '') 
+
+@section('content')  
+
+@endsection

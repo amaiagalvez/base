@@ -1,0 +1,15 @@
+<?php
+
+namespace {{ namespace }};
+
+use PHPUnit\Framework\TestCase;
+
+class {{ class }} extends TestCase
+{
+    /** test */
+
+    public function fname()
+    {
+
+    }
+}

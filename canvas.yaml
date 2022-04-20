@@ -1,0 +1,27 @@
+preset: package
+
+namespace: Amaia\Base
+user-auth-provider: App\User
+
+paths:
+  src: src
+  resource: resources
+
+factory:
+  path: database/factories
+
+migration:
+  path: database/migrations
+  prefix: ""
+
+console:
+  namespace: Amaia\Base\Console
+
+model:
+  namespace: Amaia\Base\Models
+
+provider:
+  namespace: Amaia\Base\Providers
+
+testing:
+  namespace: Amaia\Base\Tests

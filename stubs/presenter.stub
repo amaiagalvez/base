@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Presenters\Presenter;
+
+class {{ class }}Presenter extends Presenter
+{
+    public function title()
+    {
+        return $this->{'title_' . app()->getLocale()};
+    }    
+}
