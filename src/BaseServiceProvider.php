@@ -25,10 +25,25 @@ class BaseServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
 
+            // Config
+
             $this->publishes([
                 __DIR__ . '/../config/base.php' => config_path('base.php'),
             ], 'amaia-base-config');
+
+            // Migrations
+
+            if (!class_exists('CreateNotesTable')) {
+                $this->publishes([
+                    __DIR__ . '/../database/migrations' => database_path('migrations'),
+                    // you can add any number of migrations here
+                ], 'amaia-base-migrations');
+            }
         }
+
+        // Migrations
+
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         // Register the command if we are using the application via the CLI
 
