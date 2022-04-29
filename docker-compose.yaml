@@ -1,6 +1,26 @@
 version: '3.9'
 
 services:
+  base:
+    image: webdevops/php-apache-dev:${DC_PHP:-8.0}
+    user: "${DC_UID:-1000}:${DC_GID:-1000}"
+    volumes:
+      - ./:/app
+      - ${HOME}/Dokumentuak/Packages:/packages
+      - ${HOME}/Dokumentuak/dc-data/home:/home/application
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    working_dir: /app
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
+      CONTAINER_UID: 1000
+      XDEBUG_CLIENT_PORT: 9000
+      XDEBUG_START_WITH_REQUEST: 'trigger'
+      XDEBUG_SESSION: VSCODE
+      XDEBUG_MODE: 'debug,develop,coverage,trace,profile'
+    networks:
+      - frontend
+
   base-composer:
     image: webdevops/php-apache-dev:${DC_PHP:-8.0}
     profiles: [ "composer" ]

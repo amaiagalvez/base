@@ -60,5 +60,7 @@ class InstallBasePackage extends Command
         }
 
         $this->call('vendor:publish', $params);
+
+        //TODO: migrations???
     }
 }
