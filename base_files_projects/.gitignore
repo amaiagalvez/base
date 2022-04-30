@@ -15,3 +15,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 /dc-data/mysql
+/tests/Feature/Jetstream
+/tests/Feature/base
+/tests/Unit/base

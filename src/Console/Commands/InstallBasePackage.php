@@ -20,8 +20,9 @@ class InstallBasePackage extends Command
 
         $this->info('Publishing configuration...');
 
+        exec('bash rmFiles.sh');
+
         if (!$this->configExists('base.php')) {
-            exec('bash rmFiles.sh');
             $this->publishConfiguration();
             $this->info('Published configuration');
         } else {
