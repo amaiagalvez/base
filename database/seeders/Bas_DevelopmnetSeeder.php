@@ -19,6 +19,8 @@ class Bas_DevelopmnetSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
 
+        Note::truncate();
+
         Schema::enableForeignKeyConstraints();
 
         User::factory()->has(Note::factory()->count(5), 'notes')

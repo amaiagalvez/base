@@ -8,7 +8,7 @@ use Amaia\Base\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class UserTableSeeder extends Seeder
 {
     /**
      * Seed the application's database.

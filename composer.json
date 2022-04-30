@@ -27,7 +27,7 @@
         "psr-4": {
           "Amaia\\Base\\": "src",
           "Amaia\\Base\\Database\\Factories\\": "database/factories",
-          "Amaia\\Base\\Database\\Seeders\\": "database/seeders/"
+          "Amaia\\Base\\Database\\Seeders\\": "database/seeders"
         }
     },
     "autoload-dev": {
@@ -36,9 +36,9 @@
         },
         "files": [
             "src/Helpers/files.php",
-            "database/seeds/Bas_DatabaseSeeder.php",
-            "database/seeds/Bas_DevelopmnetSeeder.php",
-            "database/seeds/UserTableSeeder.php"
+            "database/seeders/Bas_DatabaseSeeder.php",
+            "database/seeders/Bas_DevelopmnetSeeder.php",
+            "database/seeders/UserTableSeeder.php"
         ]
     },
     "extra": {
