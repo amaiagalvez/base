@@ -2,6 +2,7 @@
 
 namespace Amaia\Base\Tests;
 
+use Amaia\Base\BaseRouteServiceProvider;
 use Amaia\Base\BaseServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
@@ -16,6 +17,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
   {
     return [
       BaseServiceProvider::class,
+      BaseRouteServiceProvider::class
     ];
   }
 

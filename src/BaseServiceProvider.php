@@ -41,9 +41,17 @@ class BaseServiceProvider extends ServiceProvider
             }
         }
 
+        // Routes 
+
+        $this->loadRoutesFrom(__DIR__ . '/../routes/_test.php');
+
         // Migrations
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        // Views
+
+        $this->loadViewsFrom((__DIR__ . '/../resources/views'), 'base');
 
         // Register the command if we are using the application via the CLI
 
