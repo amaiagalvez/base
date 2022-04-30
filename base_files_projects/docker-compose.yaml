@@ -1,0 +1,119 @@
+version: '3.9'
+
+services:
+  xxxxx:
+    image: webdevops/php-apache-dev:${DC_PHP:-8.0}
+    user: "${DC_UID:-1000}:${DC_GID:-1000}"
+    volumes:
+      - ./:/app
+      - ${HOME}/Dokumentuak/Packages:/packages
+      - ${HOME}/Dokumentuak/dc-data/home:/home/application
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    working_dir: /app
+    ports:
+      - "8000:80"
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
+      CONTAINER_UID: 1000
+      XDEBUG_CLIENT_PORT: 9000
+      XDEBUG_START_WITH_REQUEST: 'trigger'
+      XDEBUG_SESSION: VSCODE
+      XDEBUG_MODE: 'debug,develop,coverage,trace,profile'
+    depends_on:
+      - db
+    networks:
+      - frontend
+
+  xxxxx-composer:
+    image: webdevops/php-apache-dev:${DC_PHP:-8.0}
+    profiles: [ "composer" ]
+    volumes:
+      - ./:/app
+      - ${HOME}/Dokumentuak/Packages:/packages
+      - ${HOME}/Dokumentuak/dc-data/home:/home/application
+    working_dir: /app
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
+    command: bash -c " rm -Rf vendor && rm -f composer.lock && composer install && chown -R ${DC_UID:-1000}:${DC_GID:-1000} vendor && chown ${DC_UID:-1000}:${DC_GID:-1000} composer.lock"
+    networks:
+      - frontend
+
+  xxxxx-npm:
+    image: node:${DC_NODE:-17-bullseye}
+    profiles: [ "npm" ]
+    volumes:
+      - ./:/app
+      - ${HOME}/Dokumentuak/Packages:/packages
+      - ${HOME}/Dokumentuak/dc-data/home:/home/application
+    working_dir: /app
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
+    command: bash -c "rm -f package-lock.json && rm -rf public/css && rm -rf public/js && npm install && npm run prod && chown -R ${DC_UID:-1000}:${DC_GID:-1000} node_modules && chown ${DC_UID:-1000}:${DC_GID:-1000} package-lock.json"
+    networks:
+      - frontend
+
+  xxxxx-npmdev:
+    image: node:${DC_NODE:-17-bullseye}
+    profiles: [ "npm" ]
+    volumes:
+      - ./:/app
+      - ${HOME}/Dokumentuak/Packages:/packages
+      - ${HOME}/Dokumentuak/dc-data/home:/home/application
+    working_dir: /app
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
+    command: bash -c "rm -rf public/css && rm -rf public/js && npm run dev"
+    networks:
+      - frontend
+
+  xxxxx-migrate:
+    image: webdevops/php-apache-dev:${DC_PHP:-8.0}
+    profiles: [ "migrate" ]
+    volumes:
+      - ./:/app
+      - ${HOME}/Dokumentuak/Packages:/packages
+      - ${HOME}/Dokumentuak/dc-data/home:/home/application
+    working_dir: /app
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
+    command: bash -c "php artisan migrate:fresh && php artisan db:seed"
+    depends_on:
+      - db
+    networks:
+      - frontend
+
+  db:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password --sql-mode=""
+    environment:
+      MYSQL_ROOT_PASSWORD: tormenta
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel
+    volumes:
+      - ./dc-data/mysql:/var/lib/mysql
+      - ./dc-data/mysqldumps:/mysqldumps
+    networks:
+      - frontend
+    ports:
+      - 13306:3306
+
+  myadmin:
+    image: phpmyadmin:latest
+    ports:
+      - 4000:80
+    links:
+      - db:db
+    networks:
+      - frontend
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - ${MAILHOG_PORT:-8025}:8025
+    networks:
+      - frontend
+
+networks:
+  frontend: null

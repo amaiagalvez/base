@@ -1,0 +1,3 @@
+{
+    "phpunit.command": "docker-compose exec xxxxx"
+}
