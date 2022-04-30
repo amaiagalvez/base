@@ -1,6 +1,6 @@
 <?php
 
-namespace Amaia\Base\Database\Factories;
+namespace Database\Factories;
 
 use Amaia\Base\Models\Note;
 use Amaia\Base\Models\User;

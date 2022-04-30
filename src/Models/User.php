@@ -2,7 +2,7 @@
 
 namespace Amaia\Base\Models;
 
-use Amaia\Base\Database\Factories\UserFactory;
+use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -16,8 +16,12 @@ use Amaia\Base\Models\Note;
 
 class User extends Authenticatable
 {
+    use HasApiTokens;
     use HasFactory;
+    use HasProfilePhoto;
+    use HasTeams;
     use Notifiable;
+    use TwoFactorAuthenticatable;
 
     /**
      * The attributes that are mass assignable.
@@ -62,7 +66,6 @@ class User extends Authenticatable
     {
         return UserFactory::new();
     }
-
 
     /**
      * Relationships

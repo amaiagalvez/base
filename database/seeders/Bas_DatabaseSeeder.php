@@ -1,6 +1,6 @@
 <?php
 
-namespace Amaia\Base\Database\Seeders;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 

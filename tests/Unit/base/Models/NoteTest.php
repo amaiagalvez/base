@@ -1,9 +1,9 @@
 <?php
 
-namespace Amaia\Base\Tests\Unit;
+namespace Tests\Unit\base\Models;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Amaia\Base\Tests\TestCase;
+use Tests\TestCase;
 use Amaia\Base\Models\Note;
 
 class NoteTest extends TestCase

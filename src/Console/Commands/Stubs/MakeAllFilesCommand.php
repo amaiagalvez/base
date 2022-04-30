@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\Stubs;
+namespace Amaia\Base\Console\Commands\Stubs;
 
 use Illuminate\Support\Str;
 use Illuminate\Console\GeneratorCommand;
@@ -44,9 +44,13 @@ class MakeAllFilesCommand extends GeneratorCommand
      */
     protected function resolveStubPath($stub)
     {
-        return file_exists($customPath = $this->laravel->basePath(trim($stub, '/')))
-            ? $customPath
-            : __DIR__ . $stub;
+        if (file_exists($customPath = $this->laravel->basePath(trim($stub, '/')))) {
+            return $customPath;
+        } elseif (file_exists($packagePath = __DIR__ . $stub)) {
+            return $packagePath;
+        } else {
+            return 'vendor/amaiagalvez/base/' . $stub;
+        }
     }
 
     /**

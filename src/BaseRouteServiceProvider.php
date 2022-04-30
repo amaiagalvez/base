@@ -7,6 +7,8 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 
 class BaseRouteServiceProvider extends ServiceProvider
 {
+    public const HOME = '/';
+
     public function map()
     {
         Route::pattern('id', '\d+');

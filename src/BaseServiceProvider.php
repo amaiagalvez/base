@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
 use Amaia\Base\Console\Commands\InstallBasePackage;
+use Amaia\Base\Providers\AuthServiceProvider;
+use Amaia\Base\Providers\FortifyServiceProvider;
+use Amaia\Base\Providers\JetstreamServiceProvider;
+use Amaia\Base\Console\Commands\Stubs\MakeAllFilesCommand;
+use Amaia\Base\Console\Commands\Stubs\MakePresenterCommand;
+use Amaia\Base\Console\Commands\Stubs\MakeViewCommand;
+use Amaia\Base\Console\Commands\Stubs\MakeDocumentationCommand;
 
 class BaseServiceProvider extends ServiceProvider
 {
@@ -31,7 +38,7 @@ class BaseServiceProvider extends ServiceProvider
             // Config
 
             $this->publishes([
-                __DIR__ . '/../config/base.php' => config_path('base.php'),
+                __DIR__ . '/../config' => config_path(''),
             ], 'amaia-base-config');
 
             // Migrations
@@ -42,6 +49,25 @@ class BaseServiceProvider extends ServiceProvider
                     // you can add any number of migrations here
                 ], 'amaia-base-migrations');
             }
+
+            /* Files */
+
+            $this->publishes(
+                [
+                    __DIR__ . '/../base_files_projects' => base_path('')
+                ],
+                'amaia-base-files'
+            );
+
+            /* Tests */
+
+            $this->publishes(
+                [
+                    __DIR__ . '/../tests/Feature' => base_path('tests/Feature'),
+                    __DIR__ . '/../tests/Unit' => base_path('tests/Unit'),
+                ],
+                'amaia-base-tests'
+            );
         }
 
         // Routes 
@@ -60,11 +86,21 @@ class BaseServiceProvider extends ServiceProvider
 
         Blade::component('card', Card::class);
 
+        // Providers
+
+        $this->app->register(AuthServiceProvider::class);
+        $this->app->register(FortifyServiceProvider::class);
+        $this->app->register(JetstreamServiceProvider::class);
+
         // Register the command if we are using the application via the CLI
 
         if ($this->app->runningInConsole()) {
             $this->commands([
                 InstallBasePackage::class,
+                MakeAllFilesCommand::class,
+                MakeDocumentationCommand::class,
+                MakePresenterCommand::class,
+                MakeViewCommand::class
             ]);
         }
 

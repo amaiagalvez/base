@@ -26,13 +26,8 @@
     "autoload": {
         "psr-4": {
           "Amaia\\Base\\": "src",
-          "Amaia\\Base\\Database\\Factories\\": "database/factories",
-          "Amaia\\Base\\Database\\Seeders\\": "database/seeders"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-          "Amaia\\Base\\Tests\\": "tests"
+          "Database\\Factories\\": "database/factories",
+          "Database\\Seeders\\": "database/seeders"
         },
         "files": [
             "src/Helpers/files.php",
@@ -40,6 +35,11 @@
             "database/seeders/Bas_DevelopmnetSeeder.php",
             "database/seeders/UserTableSeeder.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+          "Tests\\": "tests"
+        }
     },
     "extra": {
         "laravel": {

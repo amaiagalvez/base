@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\Stubs;
+namespace Amaia\Base\Console\Commands\Stubs;
 
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputArgument;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Amaia\Base\Database\Factories;
+namespace Database\Factories;
 
-use App\Models\Team;
+use Amaia\Base\Models\Team;
 use Amaia\Base\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;

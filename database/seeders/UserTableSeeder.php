@@ -1,6 +1,6 @@
 <?php
 
-namespace Amaia\Base\Database\Seeders;
+namespace Database\Seeders;
 
 use Faker\Factory;
 use Amaia\Base\Models\Team;
@@ -33,12 +33,12 @@ class UserTableSeeder extends Seeder
                     ]
                 );
 
-            // $team = Team::factory()->create(
-            //     [
-            //         'user_id' => $user->id,
-            //         'name' => "Amaia's Team"
-            //     ]
-            // );
+            $team = Team::factory()->create(
+                [
+                    'user_id' => $user->id,
+                    'name' => "Amaia's Team"
+                ]
+            );
         }
     }
 }

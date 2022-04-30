@@ -1,10 +1,10 @@
 <?php
 
-namespace Amaia\Base\Tests\Unit;
+namespace Tests\Unit\base\Commands;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
-use Amaia\Base\Tests\TestCase;
+use Tests\TestCase;
 
 class InstallBasePackageTest extends TestCase
 {

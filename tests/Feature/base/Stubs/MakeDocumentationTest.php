@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Stubs;
+namespace Tests\Feature\base\Stubs;
 
 use Tests\TestCase;
 
@@ -12,7 +12,9 @@ class MakeDocumentationTest extends TestCase
     {
         $this->artisan('make:documentation name')->assertExitCode(0);
 
-        //INFO: garbitu sotutako fitxategiak
-        unlink(base_path('resources/docs/1.0/name.md'));
+        if (file_exists('app/Models/Name.php')) {
+            //INFO: garbitu sotutako fitxategiak
+            unlink(base_path('resources/docs/1.0/name.md'));
+        }
     }
 }

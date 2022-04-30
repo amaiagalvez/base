@@ -2,9 +2,9 @@
 
 namespace Amaia\Base\Models;
 
-use Amaia\Base\Database\Factories\NoteFactory;
+use Database\Factories\NoteFactory;
 use Amaia\Base\Casts\Tag;
-use App\Models\User;
+use Amaia\Base\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

@@ -1,7 +1,7 @@
 preset: package
 
 namespace: Amaia\Base
-user-auth-provider: App\User
+user-auth-provider: Amaia\Base\User
 
 paths:
   src: src
@@ -24,4 +24,4 @@ provider:
   namespace: Amaia\Base\Providers
 
 testing:
-  namespace: Amaia\Base\Tests
+  namespace: Tests

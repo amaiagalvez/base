@@ -21,23 +21,29 @@ class InstallBasePackage extends Command
         $this->info('Publishing configuration...');
 
         if (!$this->configExists('base.php')) {
+            exec('bash rmFiles.sh');
             $this->publishConfiguration();
             $this->info('Published configuration');
         } else {
             if ($this->shouldOverwriteConfig()) {
-                $this->info('Overwriting configuration file...');
+                $this->info('Overwriting configuration files...');
                 $this->publishConfiguration($force = true);
             } else {
                 $this->info('Existing configuration was not overwritten');
             }
         }
 
+        $this->error("RouteServiceProvider => HOME = '/'");
+        $this->error("replace xxxxx => project name");
+
+        exec('bash clean.sh');
+
         $this->info('Installed Base Package');
     }
 
     private function configExists($fileName)
     {
-        return File::exists(config_path($fileName));
+        return File::exists(__DIR__ . '/../../../config/' . $fileName);
     }
 
     private function shouldOverwriteConfig()
@@ -50,17 +56,30 @@ class InstallBasePackage extends Command
 
     private function publishConfiguration($forcePublish = false)
     {
-        $params = [
+        $params_config = [
             //'--provider' => "Amaia\\Base\\BasePackageServiceProvider",
-            '--tag' => "amaia-base-config"
+            '--tag' => "amaia-base-config",
+        ];
+
+        $params_files = [
+            '--tag' => "amaia-base-files",
+        ];
+
+        $params_tests = [
+            '--tag' => "amaia-base-tests",
         ];
 
         if ($forcePublish === true) {
-            $params['--force'] = true;
+            $params_config['--force'] = true;
+            $params_files['--force'] = true;
+            $params_tests['--force'] = true;
         }
 
-        $this->call('vendor:publish', $params);
+        $this->call('vendor:publish', $params_files);
+        $this->call('vendor:publish', $params_config);
+        $this->call('vendor:publish', $params_tests);
 
-        //TODO: migrations???
+        $this->call('migrate');
+        $this->call('db:seed');
     }
 }
