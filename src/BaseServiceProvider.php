@@ -7,13 +7,13 @@ use Amaia\Base\View\Components\Card;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
-use Amaia\Base\Console\Commands\InstallBasePackage;
 use Amaia\Base\Providers\AuthServiceProvider;
 use Amaia\Base\Providers\FortifyServiceProvider;
 use Amaia\Base\Providers\JetstreamServiceProvider;
+use Amaia\Base\Console\Commands\InstallBasePackage;
+use Amaia\Base\Console\Commands\Stubs\MakeViewCommand;
 use Amaia\Base\Console\Commands\Stubs\MakeAllFilesCommand;
 use Amaia\Base\Console\Commands\Stubs\MakePresenterCommand;
-use Amaia\Base\Console\Commands\Stubs\MakeViewCommand;
 use Amaia\Base\Console\Commands\Stubs\MakeDocumentationCommand;
 
 class BaseServiceProvider extends ServiceProvider
@@ -63,8 +63,8 @@ class BaseServiceProvider extends ServiceProvider
 
             $this->publishes(
                 [
-                    __DIR__ . '/../tests/Feature' => base_path('tests/Feature'),
-                    __DIR__ . '/../tests/Unit' => base_path('tests/Unit'),
+                    __DIR__ . '/../tests/Feature/base' => base_path('tests/Feature/base'),
+                    __DIR__ . '/../tests/Unit/base' => base_path('tests/Unit/base'),
                 ],
                 'amaia-base-tests'
             );

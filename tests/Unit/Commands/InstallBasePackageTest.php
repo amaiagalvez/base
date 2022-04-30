@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\base\Commands;
+namespace Tests\Unit\Commands;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class InstallBasePackageTest extends TestCase
 {
-    /** @test */
+   
     function the_install_command_copies_the_configuration()
     {
         // make sure we're starting from a clean state
@@ -23,7 +23,7 @@ class InstallBasePackageTest extends TestCase
         $this->assertTrue(File::exists(config_path('base.php')));
     }
 
-    /** @test */
+   
     public function when_a_config_file_is_present_users_can_choose_to_not_overwrite_it()
     {
         // Given we have already have an existing config file
@@ -50,7 +50,7 @@ class InstallBasePackageTest extends TestCase
         unlink(config_path('base.php'));
     }
 
-    /** @test */
+   
     public function when_a_config_file_is_present_users_can_choose_to_do_overwrite_it()
     {
         // Given we have already have an existing config file

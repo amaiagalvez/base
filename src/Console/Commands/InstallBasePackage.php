@@ -20,6 +20,7 @@ class InstallBasePackage extends Command
 
         $this->info('Publishing configuration...');
 
+        $this->info('Remove files');
         exec('bash rmFiles.sh');
 
         if (!$this->configExists('base.php')) {
@@ -37,6 +38,7 @@ class InstallBasePackage extends Command
         $this->error("RouteServiceProvider => HOME = '/'");
         $this->error("replace xxxxx => project name");
 
+        $this->info('Clean files');
         exec('bash clean.sh');
 
         $this->info('Installed Base Package');

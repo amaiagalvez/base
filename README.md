@@ -23,6 +23,10 @@ sudo apt install php-cli php-xml php-curl unzip
 ```
 <a href="https://getcomposer.org/download/">Download Composer</a>  
 
+## Package Development
+```
+    bash startPackage.sh base
+```
 
 ## Install new project
 
@@ -43,7 +47,6 @@ sudo apt install php-cli php-xml php-curl unzip
 ```
     copy **docker-compose.yaml** && replace xxxxx => project name
     > Docker: Compose up
-    **.env** => database config
 ```
 
 - **Base Package**
@@ -64,4 +67,6 @@ sudo apt install php-cli php-xml php-curl unzip
     php artisan amaia:base-install
     >>>>> red messages!!
 
+    >>>>> copy .env.example .env
+    php artisan key:generate
 ```

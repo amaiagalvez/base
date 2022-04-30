@@ -23,7 +23,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
       BaseRouteServiceProvider::class,
       AuthServiceProvider::class,
       FortifyServiceProvider::class,
-      JetstreamServiceProvider::class,
+      JetstreamServiceProvider::class
     ];
   }
 
