@@ -3,8 +3,11 @@
 namespace Amaia\Base;
 
 use Amaia\Base\Classes\Calculator;
-use Amaia\Base\Console\Commands\InstallBasePackage;
+use Amaia\Base\View\Components\Card;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Console\Scheduling\Schedule;
+use Amaia\Base\Console\Commands\InstallBasePackage;
 
 class BaseServiceProvider extends ServiceProvider
 {
@@ -52,6 +55,10 @@ class BaseServiceProvider extends ServiceProvider
         // Views
 
         $this->loadViewsFrom((__DIR__ . '/../resources/views'), 'base');
+
+        // ViewComponents
+
+        Blade::component('card', Card::class);
 
         // Register the command if we are using the application via the CLI
 
