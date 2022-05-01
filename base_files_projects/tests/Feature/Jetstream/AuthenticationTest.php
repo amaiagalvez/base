@@ -15,7 +15,7 @@ class AuthenticationTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->get('/login');
+        $response = $this->get('/bas/login');
 
         $response->assertStatus(200);
     }
@@ -24,7 +24,7 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->post('/login', [
+        $response = $this->post('/bas/login', [
             'email' => $user->email,
             'password' => 'password',
         ]);
@@ -37,7 +37,7 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->post('/login', [
+        $this->post('/bas/login', [
             'email' => $user->email,
             'password' => 'wrong-password',
         ]);

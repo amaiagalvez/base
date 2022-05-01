@@ -2,10 +2,13 @@
 
 namespace Amaia\Base;
 
+use Livewire\Livewire;
 use Amaia\Base\Classes\Calculator;
 use Amaia\Base\View\Components\Card;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Amaia\Base\View\Components\AppLayout;
+use Amaia\Base\View\Components\GuestLayout;
 use Illuminate\Console\Scheduling\Schedule;
 use Amaia\Base\Providers\AuthServiceProvider;
 use Amaia\Base\Providers\FortifyServiceProvider;
@@ -59,6 +62,15 @@ class BaseServiceProvider extends ServiceProvider
                 'amaia-base-files'
             );
 
+            /* Stubs */
+
+            $this->publishes(
+                [
+                    __DIR__ . '/../stubs' => base_path('stubs')
+                ],
+                'amaia-base-stubs'
+            );
+
             /* Tests */
 
             $this->publishes(
@@ -81,10 +93,17 @@ class BaseServiceProvider extends ServiceProvider
         // Views
 
         $this->loadViewsFrom((__DIR__ . '/../resources/views'), 'base');
+        $this->loadViewsFrom((__DIR__ . '/../resources/views'), '');
 
         // ViewComponents
 
+        Blade::component('app-layout', AppLayout::class);
+        Blade::component('guest-layout', GuestLayout::class);
         Blade::component('card', Card::class);
+
+        // Livewire
+
+        //Livewire::component('navigation-menu', NavigationMenu::class);
 
         // Providers
 

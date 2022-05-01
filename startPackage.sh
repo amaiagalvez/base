@@ -8,7 +8,6 @@ function packageStart {
         -v $HOME/Webguneak/dc-data/composerCache:/composerCache \
         -v $HOME/Webguneak/Packages:/packages \
         -v $(pwd):/app \
-        -e XDEBUG_CLIENT_HOST=172.17.0.1 \
         -e XDEBUG_CLIENT_PORT=9000 \
         -e XDEBUG_START_WITH_REQUEST='trigger' \
         -e XDEBUG_SESSION=VSCODE \

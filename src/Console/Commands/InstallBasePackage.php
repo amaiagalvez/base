@@ -20,9 +20,6 @@ class InstallBasePackage extends Command
 
         $this->info('Publishing configuration...');
 
-        $this->info('Remove files');
-        exec('bash rmFiles.sh');
-
         if (!$this->configExists('base.php')) {
             $this->publishConfiguration();
             $this->info('Published configuration');
@@ -35,11 +32,16 @@ class InstallBasePackage extends Command
             }
         }
 
-        $this->error("RouteServiceProvider => HOME = '/'");
         $this->error("replace xxxxx => project name");
+        $this->error("copy .env.example => .env");
+        $this->error("only if is the first time => php artisan key:generate");
+        $this->error("only if is the first time => php artisan storage:link");
+        $this->error("only if is the first time => create laraveltest database and give grant permissions to laravel user");
 
-        $this->info('Clean files');
-        exec('bash clean.sh');
+        if (config('app.env') == 'local') {
+            $this->info('Clean files');
+            exec('bash clean.sh');
+        }
 
         $this->info('Installed Base Package');
     }
@@ -72,17 +74,31 @@ class InstallBasePackage extends Command
             '--tag' => "amaia-base-tests",
         ];
 
+        $params_stubs = [
+            '--tag' => "amaia-base-stubs",
+        ];
+
         if ($forcePublish === true) {
             $params_config['--force'] = true;
             $params_files['--force'] = true;
             $params_tests['--force'] = true;
+            $params_stubs['--force'] = true;
         }
 
         $this->call('vendor:publish', $params_files);
+
+        if (config('app.env') == 'local') {
+            $this->info('Remove files');
+            exec('bash rmFiles.sh');
+        }
+
         $this->call('vendor:publish', $params_config);
         $this->call('vendor:publish', $params_tests);
+        $this->call('vendor:publish', $params_stubs);
 
         $this->call('migrate');
         $this->call('db:seed');
+
+        //$this->call('test');
     }
 }

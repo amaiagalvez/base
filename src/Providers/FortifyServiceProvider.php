@@ -2,15 +2,18 @@
 
 namespace Amaia\Base\Providers;
 
+use Amaia\Base\Models\User;
+use Illuminate\Http\Request;
+use Laravel\Fortify\Fortify;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
 use Amaia\Base\Actions\Fortify\CreateNewUser;
+use Laravel\Fortify\Http\Requests\LoginRequest;
 use Amaia\Base\Actions\Fortify\ResetUserPassword;
 use Amaia\Base\Actions\Fortify\UpdateUserPassword;
 use Amaia\Base\Actions\Fortify\UpdateUserProfileInformation;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\ServiceProvider;
-use Laravel\Fortify\Fortify;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -31,10 +34,31 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // To take base package views
+        if (!empty(config('fortify.alternative-fortify-views'))) {
+            foreach (config('fortify.alternative-fortify-views') as $method => $view) {
+                Fortify::$method(fn () => view($view));
+            }
+        }
+
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+
+        // To change login email or username
+
+        Fortify::authenticateUsing(function (LoginRequest $request) {
+            $user = User::where('email', $request->email)
+                ->orWhere('username', $request->email)->first();
+
+            if (
+                $user &&
+                Hash::check($request->password, $user->password)
+            ) {
+                return $user;
+            }
+        });
 
         RateLimiter::for('login', function (Request $request) {
             $email = (string) $request->email;

@@ -19,7 +19,7 @@ class PasswordResetTest extends TestCase
             return $this->markTestSkipped('Password updates are not enabled.');
         }
 
-        $response = $this->get('/forgot-password');
+        $response = $this->get('/bas/forgot-password');
 
         $response->assertStatus(200);
     }
@@ -34,7 +34,7 @@ class PasswordResetTest extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->post('/forgot-password', [
+        $response = $this->post('/bas/forgot-password', [
             'email' => $user->email,
         ]);
 
@@ -51,12 +51,12 @@ class PasswordResetTest extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->post('/forgot-password', [
+        $response = $this->post('/bas/forgot-password', [
             'email' => $user->email,
         ]);
 
         Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
-            $response = $this->get('/reset-password/' . $notification->token);
+            $response = $this->get('/bas/reset-password/' . $notification->token);
 
             $response->assertStatus(200);
 
@@ -74,12 +74,12 @@ class PasswordResetTest extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->post('/forgot-password', [
+        $response = $this->post('/bas/forgot-password', [
             'email' => $user->email,
         ]);
 
         Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
-            $response = $this->post('/reset-password', [
+            $response = $this->post('/bas/reset-password', [
                 'token' => $notification->token,
                 'email' => $user->email,
                 'password' => 'password',

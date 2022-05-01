@@ -74,7 +74,7 @@ return [
     |
     */
 
-    'prefix' => '',
+    'prefix' => 'bas',
 
     'domain' => null,
 
@@ -119,6 +119,17 @@ return [
     */
 
     'views' => true,
+
+    'alternative-fortify-views'    => [
+        'loginView' => 'base::auth.login',
+        'registerView' => 'base::auth.register',
+        'twoFactorChallengeView' => 'base::auth.two-factor-challenge',
+        'resetPasswordView' => 'base::auth.reset-password',
+        'verifyEmailView' => 'base::auth.verify-email',
+        'confirmPasswordView' => 'base::auth.confirm-password',
+        'requestPasswordResetLinkView' => 'base::auth.forgot-password',
+        'resetPasswordView' => 'base::auth.reset-password',
+    ],
 
     /*
     |--------------------------------------------------------------------------

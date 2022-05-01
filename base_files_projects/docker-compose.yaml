@@ -9,7 +9,7 @@ services:
       - ${HOME}/Dokumentuak/Packages:/packages
       - ${HOME}/Dokumentuak/dc-data/home:/home/application
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - host.docker.internal:host-gateway
     working_dir: /app
     ports:
       - "8000:80"

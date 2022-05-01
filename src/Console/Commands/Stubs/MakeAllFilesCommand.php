@@ -44,12 +44,12 @@ class MakeAllFilesCommand extends GeneratorCommand
      */
     protected function resolveStubPath($stub)
     {
-        if (file_exists($customPath = $this->laravel->basePath(trim($stub, '/')))) {
-            return $customPath;
-        } elseif (file_exists($packagePath = __DIR__ . $stub)) {
-            return $packagePath;
+        if (file_exists($path = '/app' . $stub)) {
+            return $path;
+        } elseif (file_exists($path = 'vendor/amaiagalvez/base/' . $stub)) {
+            return $path;
         } else {
-            return 'vendor/amaiagalvez/base/' . $stub;
+            dd('path not found');
         }
     }
 

@@ -31,6 +31,7 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         Jetstream::useUserModel('Amaia\Base\Models\User');
         Jetstream::useTeamModel('Amaia\Base\Models\Team');
         Jetstream::useMembershipModel('Amaia\Base\Models\Membership');

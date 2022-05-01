@@ -25,6 +25,7 @@ class UserTableSeeder extends Seeder
                     [
                         'id' => 1,
                         'name' => 'Amaia',
+                        'username' => 'amaia',
                         'email' => 'info@amaia.eus',
                         'email_verified_at' => now(),
                         'password' => '$2y$10$MesS2PwYSC71yviyzmFcoevvxoWXSvCumChwxWIDzaYwnnOY6jJR.', //123456
@@ -36,7 +37,8 @@ class UserTableSeeder extends Seeder
             $team = Team::factory()->create(
                 [
                     'user_id' => $user->id,
-                    'name' => "Amaia's Team"
+                    'name' => "Amaia's Team",
+                    'personal_team' => true
                 ]
             );
         }

@@ -20,7 +20,7 @@ class ExampleTest extends TestCase
     {
         //mix-manifest.json fitxategia bilatzen duelako
 
-        $this->app->instance('path.public', __DIR__ . '/../..');
+        $this->app->instance('path.public', __DIR__ . '/../../..');
 
         $response = $this->get(route('base::test'));
 

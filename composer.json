@@ -55,7 +55,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "test": "vendor/bin/phpunit --testdox",
+        "test": "vendor/bin/phpunit ",
+        "test-t": "vendor/bin/phpunit --testdox",
         "test-f": "vendor/bin/phpunit --testdox --filter"
       }
 }

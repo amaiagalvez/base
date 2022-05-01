@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Jetstream;
 
-use Amaia\Base\BaseRouteServiceProvider;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 use Laravel\Fortify\Features;
 use Laravel\Jetstream\Jetstream;
-use Tests\TestCase;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RegistrationTest extends TestCase
 {
@@ -18,7 +18,7 @@ class RegistrationTest extends TestCase
             return $this->markTestSkipped('Registration support is not enabled.');
         }
 
-        $response = $this->get('/register');
+        $response = $this->get('/bas/register');
 
         $response->assertStatus(200);
     }
@@ -29,7 +29,7 @@ class RegistrationTest extends TestCase
             return $this->markTestSkipped('Registration support is enabled.');
         }
 
-        $response = $this->get('/register');
+        $response = $this->get('/bas/register');
 
         $response->assertStatus(404);
     }
@@ -40,7 +40,7 @@ class RegistrationTest extends TestCase
             return $this->markTestSkipped('Registration support is not enabled.');
         }
 
-        $response = $this->post('/register', [
+        $response = $this->post('/bas/register', [
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => 'password',
@@ -49,6 +49,6 @@ class RegistrationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(BaseRouteServiceProvider::HOME);
+        $response->assertRedirect(RouteServiceProvider::HOME);
     }
 }

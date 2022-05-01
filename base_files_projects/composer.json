@@ -30,6 +30,9 @@
         }
     },
     "scripts": {
+        "test": "vendor/bin/phpunit ",
+        "test-t": "vendor/bin/phpunit --testdox",
+        "test-f": "vendor/bin/phpunit --testdox --filter",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "php artisan optimize",
