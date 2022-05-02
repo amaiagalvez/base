@@ -33,10 +33,6 @@ class InstallBasePackage extends Command
         }
 
         $this->error("replace xxxxx => project name");
-        $this->error("copy .env.example => .env");
-        $this->error("only if is the first time => php artisan key:generate");
-        $this->error("only if is the first time => php artisan storage:link");
-        $this->error("only if is the first time => create laraveltest database and give grant permissions to laravel user");
 
         if (config('app.env') == 'local') {
             $this->info('Clean files');
@@ -90,15 +86,21 @@ class InstallBasePackage extends Command
         if (config('app.env') == 'local') {
             $this->info('Remove files');
             exec('bash rmFiles.sh');
+            exec('rm tests/Feature/*');
         }
 
         $this->call('vendor:publish', $params_config);
         $this->call('vendor:publish', $params_tests);
         $this->call('vendor:publish', $params_stubs);
 
+        exec('rm -R public/css');
+        exec('rm -R public/js');
+        exec('rm composer.lock');
+        exec('composer update');
+
         $this->call('migrate');
         $this->call('db:seed');
 
-        //$this->call('test');
+        $this->call('test');
     }
 }

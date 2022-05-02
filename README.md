@@ -51,7 +51,7 @@ sudo apt install php-cli php-xml php-curl unzip
 
 - **Base Package**
 ```
-    **composer.json** => "amaiagalvez/base": "^1.0" 
+    **composer.json** => "amaiagalvez/base": "^1.0", 
     local package =>
             "repositories": [
                 {
@@ -62,11 +62,25 @@ sudo apt install php-cli php-xml php-curl unzip
                 }
                 }
             ]    
+    .env config
+        DB_CONNECTION=mysql
+        DB_HOST=db
+        DB_PORT=3306
+        DB_DATABASE=laravel
+        DB_USERNAME=laravel
+        DB_PASSWORD=laravel
+
+    laraveltest database and give grant permissions to laravel user
+
     > Docker: Compose up - Services - Profiles (composer) 
     > open Shell
+
     php artisan amaia:base-install
+
     >>>>> red messages!!
 
-    >>>>> copy .env.example .env
-    php artisan key:generate
+    commit => base package install   
+
+    > Docker: Compose up - Services - Profiles (npm) 
+
 ```
