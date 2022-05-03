@@ -19,3 +19,4 @@ yarn-error.log
 /tests/Feature/Jetstream
 /tests/Feature/base
 /tests/Unit/base
+/public/base

@@ -14,3 +14,4 @@ rm stubs/*
 rm -R tests/Feature/Jeststream
 rm -R tests/Feature/base
 rm -R tests/Unit/base
+rm -R public/base

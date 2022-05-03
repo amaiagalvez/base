@@ -33,6 +33,8 @@ class InstallBasePackage extends Command
         }
 
         $this->error("replace xxxxx => project name");
+        $this->error("webpack.mix.js => mix.copyDirectory('vendor/amaiagalvez/base/public/css', 'public/base/css');");
+        $this->error("webpack.mix.js => mix.copyDirectory('vendor/amaiagalvez/base/public/css', 'public/base/js');");
 
         if (config('app.env') == 'local') {
             $this->info('Clean files');

@@ -18,9 +18,12 @@ class ExampleTest extends TestCase
     /** @test */
     public function load_test_route_ok()
     {
-        //mix-manifest.json fitxategia bilatzen duelako
+        //mix erabiltzen badut:
 
-        $this->app->instance('path.public', __DIR__ . '/../../..');
+        //mix-manifest.json fitxategia bilatzen duelako
+        if (!file_exists(__DIR__ . '/../../../public/mix-manifest.json')) {
+            $this->app->instance('path.public', __DIR__ . '/../../..');
+        }
 
         $response = $this->get(route('base::test'));
 
