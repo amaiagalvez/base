@@ -23,5 +23,6 @@
         <server name="MAIL_DRIVER" value="array"/>
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
+        <server name="SANCTUM_STATEFUL_DOMAIN" value="localhost:8080"/>
     </php>
 </phpunit>

@@ -4,9 +4,6 @@ namespace Tests;
 
 use Amaia\Base\BaseRouteServiceProvider;
 use Amaia\Base\BaseServiceProvider;
-use Amaia\Base\Providers\AuthServiceProvider;
-use Amaia\Base\Providers\FortifyServiceProvider;
-use Amaia\Base\Providers\JetstreamServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -20,10 +17,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
   {
     return [
       BaseServiceProvider::class,
-      BaseRouteServiceProvider::class,
-      AuthServiceProvider::class,
-      FortifyServiceProvider::class,
-      JetstreamServiceProvider::class
+      BaseRouteServiceProvider::class
     ];
   }
 

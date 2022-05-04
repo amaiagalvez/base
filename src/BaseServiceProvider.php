@@ -18,6 +18,7 @@ use Amaia\Base\Console\Commands\Stubs\MakeViewCommand;
 use Amaia\Base\Console\Commands\Stubs\MakeAllFilesCommand;
 use Amaia\Base\Console\Commands\Stubs\MakePresenterCommand;
 use Amaia\Base\Console\Commands\Stubs\MakeDocumentationCommand;
+use Laravel\Sanctum\SanctumServiceProvider;
 
 class BaseServiceProvider extends ServiceProvider
 {
@@ -84,6 +85,8 @@ class BaseServiceProvider extends ServiceProvider
 
         // Routes 
 
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/base.php');
         $this->loadRoutesFrom(__DIR__ . '/../routes/_test.php');
 
         // Migrations
@@ -110,6 +113,7 @@ class BaseServiceProvider extends ServiceProvider
         $this->app->register(AuthServiceProvider::class);
         $this->app->register(FortifyServiceProvider::class);
         $this->app->register(JetstreamServiceProvider::class);
+        $this->app->register(SanctumServiceProvider::class);
 
         // Register the command if we are using the application via the CLI
 
