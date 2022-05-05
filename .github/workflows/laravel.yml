@@ -20,8 +20,8 @@ jobs:
       - name: non nago?
         run: ls -lha
       - name: Execute Unit tests
-        run: vendor/bin/phpunit --testdox --colors=always '/app/tests/Unit/base'
+        run: vendor/bin/phpunit --testdox --colors=always --filter '/app/tests/Unit/base'
       - name: Execute Feature tests
-        run: vendor/bin/phpunit --testdox --colors=always '/app/tests/Feature/base'
+        run: vendor/bin/phpunit --testdox --colors=always --filter '/app/tests/Feature/base'
       # - name: Install front-end dependencies
       #   run: rm -r public/css && rm -r public/js && npm install && npm run prod
