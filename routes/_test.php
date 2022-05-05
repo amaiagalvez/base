@@ -9,3 +9,8 @@ Route::get('/test', function () {
 
     return view('base::_tests.test', ['notes' => $notes]);
 })->name('test');
+
+
+Route::get('/home', function () {
+    return view('base::_tests.home');
+})->name('home');
