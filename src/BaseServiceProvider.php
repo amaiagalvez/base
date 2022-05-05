@@ -10,15 +10,16 @@ use Illuminate\Support\ServiceProvider;
 use Amaia\Base\View\Components\AppLayout;
 use Amaia\Base\View\Components\GuestLayout;
 use Illuminate\Console\Scheduling\Schedule;
+use Laravel\Sanctum\SanctumServiceProvider;
 use Amaia\Base\Providers\AuthServiceProvider;
 use Amaia\Base\Providers\FortifyServiceProvider;
+use Amaia\Base\Console\Commands\UpdateBasePackage;
 use Amaia\Base\Providers\JetstreamServiceProvider;
 use Amaia\Base\Console\Commands\InstallBasePackage;
 use Amaia\Base\Console\Commands\Stubs\MakeViewCommand;
 use Amaia\Base\Console\Commands\Stubs\MakeAllFilesCommand;
 use Amaia\Base\Console\Commands\Stubs\MakePresenterCommand;
 use Amaia\Base\Console\Commands\Stubs\MakeDocumentationCommand;
-use Laravel\Sanctum\SanctumServiceProvider;
 
 class BaseServiceProvider extends ServiceProvider
 {
@@ -120,6 +121,7 @@ class BaseServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 InstallBasePackage::class,
+                UpdateBasePackage::class,
                 MakeAllFilesCommand::class,
                 MakeDocumentationCommand::class,
                 MakePresenterCommand::class,

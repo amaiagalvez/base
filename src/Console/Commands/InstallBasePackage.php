@@ -48,6 +48,8 @@ class InstallBasePackage extends Command
 
     private function configExists($fileName)
     {
+        //TODO: kontrolatu noiz existitzen den fitxategia
+
         return File::exists(__DIR__ . '/../../../config/' . $fileName);
     }
 
