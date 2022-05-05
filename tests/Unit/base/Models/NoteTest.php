@@ -13,7 +13,7 @@ class NoteTest extends TestCase
     /** @test */
     function a_note_has_a_name()
     {
-        // $note = Note::factory()->create(['name' => 'Fake Name']);
-        // $this->assertEquals('Fake Name', $note->name);
+        $note = Note::factory()->create(['name' => 'Fake Name']);
+        $this->assertEquals('Fake Name', $note->name);
     }
 }
