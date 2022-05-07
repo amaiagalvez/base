@@ -28,8 +28,27 @@ class UpdateBasePackage extends Command
 
             $this->info('Updated Base Package');
         } else {
-            $this->info('Existing configuration was not overwritten');
+            $this->publishAssets($progressBar);
+
+            $this->advance($progressBar);
+
+            $this->info('Updated Assets');
         }
+    }
+
+    private function publishAssets($progressBar)
+    {
+
+        $this->advance($progressBar);
+        exec('bash vendor/amaiagalvez/base/base_files_projects/rmFiles.sh');
+
+        $params_update = [
+            '--tag' => "amaia-base-update",
+            '--force' => true
+        ];
+
+        $this->advance($progressBar);
+        $this->call('vendor:publish', $params_update);
     }
 
     private function publishConfiguration($progressBar)
