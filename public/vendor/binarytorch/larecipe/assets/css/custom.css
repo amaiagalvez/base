@@ -1,0 +1,8 @@
+.search-box {
+    height: 3rem;
+}
+
+.search-box input {
+    font-size: 1rem;
+    text-transform: none;
+}

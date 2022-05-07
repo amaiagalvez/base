@@ -17,9 +17,6 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
     ]);
 
-mix.copyDirectory('vendor/amaiagalvez/base/public/css', 'public/base/css');
-mix.copyDirectory('vendor/amaiagalvez/base/public/js', 'public/base/js');
-
 if (mix.inProduction()) {
     mix.version();
 }

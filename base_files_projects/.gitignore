@@ -17,6 +17,12 @@ yarn-error.log
 /dc-data/mysql
 /stubs
 /tests/Feature/Jetstream
+
+/public/vendor/binarytorch
+/resources/views/vendor/larecipe
+
+/public/base
+/resources/docs/eu/base
+/resources/docs/es/base
 /tests/Feature/base
 /tests/Unit/base
-/public/base

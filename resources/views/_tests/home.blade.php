@@ -47,8 +47,8 @@
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
                             <a href="{{ route('base::home') }}">
-                                <img src="{{ asset('storage/images/photo_large.jpg') }}"
-                                    alt="Amaia" width="50%" height="auto" class="block">
+                                <img src="{{ asset('storage/images/logo.jpg') }}" alt="Amaia"
+                                    width="50%" height="auto" class="block">
 
                             </a>
                         </div>
