@@ -67,7 +67,7 @@
                     <!-- Hamburger -->
                     <div class="-mr-2 flex items-center sm:hidden">
                         <button @click="open = ! open"
-                            class="inline-flex items-center justify-center p-2 rounded-md text-fuchsia-400 hover:text-fuchsia-500 hover:bg-fuchsia-100 focus:outline-none focus:bg-fuchsia-100 focus:text-fuchsia-500 transition">
+                            class="inline-flex items-center justify-center p-2 rounded-md text-fuchsia-400 hover:text-fuchsia-400 hover:bg-fuchsia-100 focus:outline-none focus:bg-fuchsia-100 focus:text-fuchsia-400 transition">
                             <svg class="h-6 w-6" stroke="currentColor" fill="none"
                                 viewBox="0 0 24 24">
                                 <path :class="{ 'hidden': open, 'inline-flex': !open }"
@@ -123,11 +123,11 @@
 
                         <div class="flex flex-col justify-center items-center h-96">
                             <p
-                                class="text-xs uppercase bg-fuchsia-500 text-white px-4 py-1 rounded-sm
-                        hover:bg-white hover:text-fuchsia-500 hover:border-fuchsia-500 hover:border-2">
+                                class="text-xs uppercase bg-fuchsia-400 text-white px-4 py-1 rounded-sm
+                        hover:bg-white hover:text-fuchsia-400 hover:border-fuchsia-400 hover:border-2">
                                 Developer
                             </p>
-                            <div class="bg-fuchsia-800/25 mt-2 py-3 w-full">
+                            <div class="bg-fuchsia-700/25 mt-2 py-3 w-full">
                                 <p class=" font-bold text-2xl text-white/100 text-center">
                                     Software Developer && Project Management</p>
                                 <p class="font-bold text-xs text-white text-center">20 years
@@ -141,11 +141,11 @@
 
                         <div class="flex flex-col justify-center items-center h-48">
                             <p
-                                class="text-xs uppercase bg-fuchsia-500 text-white px-4 py-1 rounded-sm
-                       hover:bg-white hover:text-fuchsia-500 hover:border-fuchsia-500 hover:border-2">
+                                class="text-xs uppercase bg-fuchsia-400 text-white px-4 py-1 rounded-sm
+                       hover:bg-white hover:text-fuchsia-400 hover:border-fuchsia-400 hover:border-2">
                                 Flowers
                             </p>
-                            <div class="bg-fuchsia-800/25 mt-2 py-3 w-full">
+                            <div class="bg-fuchsia-700/25 mt-2 py-3 w-full">
                                 <p class=" font-bold text-xl text-white/100 text-center">
                                     Marguerites && Roses
                                 </p>
@@ -159,11 +159,11 @@
 
                         <div class="flex flex-col justify-center items-center h-48">
                             <p
-                                class="text-xs uppercase bg-fuchsia-500 text-white px-4 py-1 rounded-sm
-                       hover:bg-white hover:text-fuchsia-500 hover:border-fuchsia-500 hover:border-2">
+                                class="text-xs uppercase bg-fuchsia-400 text-white px-4 py-1 rounded-sm
+                       hover:bg-white hover:text-fuchsia-400 hover:border-fuchsia-400 hover:border-2">
                                 Crochet
                             </p>
-                            <div class="bg-fuchsia-800/25 mt-2 py-3 w-full">
+                            <div class="bg-fuchsia-700/25 mt-2 py-3 w-full">
                                 <p class=" font-bold text-xl text-white/100 text-center">
                                     Crochets && Wools
                                 </p>
@@ -178,7 +178,7 @@
 
             <!-- Back to top button -->
             <button type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
-                class="inline-block p-1 bg-fuchsia-500 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-fuchsia-700 hover:shadow-lg focus:bg-fuchsia-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out hidden bottom-5 right-5 fixed"
+                class="inline-block p-1 bg-fuchsia-400 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-fuchsia-500 hover:shadow-lg focus:bg-fuchsia-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out hidden bottom-5 right-5 fixed"
                 id="btn-back-to-top">
                 <svg aria-hidden="true" focusable="false" data-prefix="fas" class="w-3 h-3"
                     role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">

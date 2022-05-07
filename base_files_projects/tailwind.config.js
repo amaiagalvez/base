@@ -12,7 +12,6 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-                space_grotesk: ["Space Grotesk"],
             },
         },
     },
