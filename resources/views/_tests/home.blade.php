@@ -49,7 +49,6 @@
                             <a href="{{ route('base::home') }}">
                                 <img src="{{ asset('storage/images/logo.jpg') }}" alt="Amaia"
                                     width="50%" height="auto" class="block">
-
                             </a>
                         </div>
 
