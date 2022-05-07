@@ -49,7 +49,7 @@ sudo apt install php-cli php-xml php-curl unzip
     > Docker: Compose up
 ```
 
-- **Base Package**
+- **Base Package Install**
 ```
     **composer.json** => "amaiagalvez/base": "^1.0", 
     local package =>
@@ -82,5 +82,12 @@ sudo apt install php-cli php-xml php-curl unzip
     commit => base package install   
 
     > Docker: Compose up - Services - Profiles (npm) 
+
+```
+
+- **Base Package Update**
+
+```
+    php artisan amaia:base-update
 
 ```

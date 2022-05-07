@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\File;
 
 class InstallBasePackage extends Command
 {
-    //To hide the command in the artisan list
-    //protected $hidden = true;
+    protected $hidden = true;
 
     protected $signature = 'amaia:base-install';
 
@@ -16,41 +15,88 @@ class InstallBasePackage extends Command
 
     public function handle()
     {
+        $progressBar = $this->output->createProgressBar(7);
+
         $this->info('Installing Base Package...');
 
-        $this->info('Publishing configuration...');
-
         if (!$this->configExists('base.php')) {
-            $this->publishConfiguration();
+            $this->info('Publishing configuration...');
+
+            $this->publishConfiguration(false, $progressBar);
+
+            $this->advance($progressBar);
+
             $this->info('Published configuration');
+
+            $this->advance($progressBar);
+
+            $this->error("replace xxxxx => project name");
+            $this->error("RouteServiceProvider => HOME = '/bas/dashboard'");
+
+            $this->info('Installed Base Package');
         } else {
+
             if ($this->shouldOverwriteConfig()) {
                 $this->info('Overwriting configuration files...');
-                $this->publishConfiguration($force = true);
+
+                $this->publishConfiguration($force = true, $progressBar);
+
+                $this->info('Published configuration');
+
+                $this->advance($progressBar);
+
+                $this->error("replace xxxxx => project name");
+                $this->error("RouteServiceProvider => HOME = '/bas/dashboard'");
+
+                $this->info('Installed Base Package');
             } else {
                 $this->info('Existing configuration was not overwritten');
             }
         }
-
-        $this->error("replace xxxxx => project name");
-        $this->error("RouteServiceProvider => HOME = '/bas/dashboard'");
-
-        $this->error("webpack.mix.js => mix.copyDirectory('vendor/amaiagalvez/base/public/css', 'public/base/css');");
-        $this->error("webpack.mix.js => mix.copyDirectory('vendor/amaiagalvez/base/public/css', 'public/base/js');");
-
-        if (config('app.env') == 'local') {
-            $this->info('Clean files');
-            exec('bash clean.sh');
-        }
-
-        $this->info('Installed Base Package');
     }
 
     private function configExists($fileName)
     {
-        //TODO: kontrolatu noiz existitzen den fitxategia
+        //TODO: kontrolatu noiz existitzen den fitxategia (orain beti galdetzen du)
 
         return File::exists(__DIR__ . '/../../../config/' . $fileName);
+    }
+
+    private function publishConfiguration($forcePublish = false, $progressBar)
+    {
+        $this->advance($progressBar);
+        exec('bash vendor/amaiagalvez/base/base_files_projects/rmFiles.sh');
+
+        $params_install = [
+            '--tag' => "amaia-base-install",
+        ];
+
+        $params_update = [
+            '--tag' => "amaia-base-update",
+        ];
+
+        if ($forcePublish === true) {
+            $params_install['--force'] = true;
+            $params_update['--force'] = true;
+        }
+
+        $this->advance($progressBar);
+        $this->call('vendor:publish', $params_install);
+        $this->call('vendor:publish', $params_update);
+
+        $this->advance($progressBar);
+        exec('composer update');
+
+        $this->advance($progressBar);
+        $this->call('migrate');
+
+        $this->advance($progressBar);
+        $this->call('db:seed');
+
+        $this->advance($progressBar);
+        $this->call('test');
+
+        exec('bash vendor/amaiagalvez/base/base_files_projects/clean.sh');
     }
 
     private function shouldOverwriteConfig()
@@ -61,52 +107,12 @@ class InstallBasePackage extends Command
         );
     }
 
-    private function publishConfiguration($forcePublish = false)
+    private function advance($progressBar)
     {
-        $params_config = [
-            //'--provider' => "Amaia\\Base\\BasePackageServiceProvider",
-            '--tag' => "amaia-base-config",
-        ];
-
-        $params_files = [
-            '--tag' => "amaia-base-files",
-        ];
-
-        $params_tests = [
-            '--tag' => "amaia-base-tests",
-        ];
-
-        $params_stubs = [
-            '--tag' => "amaia-base-stubs",
-        ];
-
-        if ($forcePublish === true) {
-            $params_config['--force'] = true;
-            $params_files['--force'] = true;
-            $params_tests['--force'] = true;
-            $params_stubs['--force'] = true;
-        }
-
-        $this->call('vendor:publish', $params_files);
-
-        if (config('app.env') == 'local') {
-            $this->info('Remove files');
-            exec('bash rmFiles.sh');
-            exec('rm tests/Feature/*');
-        }
-
-        $this->call('vendor:publish', $params_config);
-        $this->call('vendor:publish', $params_tests);
-        $this->call('vendor:publish', $params_stubs);
-
-        exec('rm -R public/css');
-        exec('rm -R public/js');
-        exec('rm composer.lock');
-        exec('composer update');
-
-        $this->call('migrate');
-        $this->call('db:seed');
-
-        $this->call('test');
+        $this->line("");
+        $this->line("");
+        $progressBar->advance();
+        $this->line("");
+        $this->line("");
     }
 }

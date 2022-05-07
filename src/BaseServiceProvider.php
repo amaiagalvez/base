@@ -40,47 +40,40 @@ class BaseServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
 
-            // Config
-
-            $this->publishes([
-                __DIR__ . '/../config' => config_path(''),
-            ], 'amaia-base-config');
-
             // Migrations
 
-            if (!class_exists('CreateNotesTable')) {
-                $this->publishes([
-                    __DIR__ . '/../database/migrations' => database_path('migrations'),
-                    // you can add any number of migrations here
-                ], 'amaia-base-migrations');
-            }
+            // if (!class_exists('CreateNotesTable')) {
+            //     $this->publishes([
+            //         __DIR__ . '/../database/migrations' => database_path('migrations'),
+            //         // you can add any number of migrations here
+            //     ], 'amaia-base-migrations');
+            // }
 
-            /* Files */
+            /* Install Files */
 
             $this->publishes(
                 [
-                    __DIR__ . '/../base_files_projects' => base_path('')
+                    __DIR__ . '/../base_files_projects' => base_path(''),
                 ],
-                'amaia-base-files'
+                'amaia-base-install'
             );
 
-            /* Stubs */
+            /* Update Files */
 
             $this->publishes(
                 [
-                    __DIR__ . '/../stubs' => base_path('stubs')
-                ],
-                'amaia-base-stubs'
-            );
-
-            /* Tests */
-
-            $this->publishes(
-                [
+                    __DIR__ . '/../config' => config_path(''),
+                    __DIR__ . '/../stubs' => base_path('stubs'),
+                    __DIR__ . '/../public/vendor' => base_path('public/vendor'),
+                    __DIR__ . '/../resources/views/vendor/larecipe' => base_path('resources/views/vendor/larecipe'),
                     __DIR__ . '/../tests/Feature/base' => base_path('tests/Feature/base'),
                     __DIR__ . '/../tests/Unit/base' => base_path('tests/Unit/base'),
+                    __DIR__ . '/../resources/docs/eu' => base_path('resources/docs/eu/base'),
+                    __DIR__ . '/../resources/docs/es' => base_path('resources/docs/es/base'),
+                    __DIR__ . '/../public/css' => base_path('public/base/css'),
+                    __DIR__ . '/../public/js' => base_path('public/base/js'),
                 ],
-                'amaia-base-tests'
+                'amaia-base-update'
             );
         }
 

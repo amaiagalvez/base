@@ -7,92 +7,72 @@ use Illuminate\Support\Facades\File;
 
 class UpdateBasePackage extends Command
 {
+    protected $hidden = true;
+
     protected $signature = 'amaia:base-update';
 
     protected $description = 'Update the Base Package';
 
     public function handle()
     {
-        $progressBar = $this->output->createProgressBar(10);
-
-        $progressBar->start();
-        $this->line("");
+        $progressBar = $this->output->createProgressBar(7);
 
         $this->info('Updating Base Package...');
-        $progressBar->advance();
-        $this->line("");
-        $this->info('Overwriting configuration files...');
-        $this->publishConfiguration(true, $progressBar);
 
-        $this->error("replace xxxxx => project name");
+        if ($this->shouldOverwriteConfig()) {
+            $this->info('Overwriting configuration files...');
 
-        if (config('app.env') == 'local') {
-            $this->info('Clean files');
-            exec('bash clean.sh');
+            $this->publishConfiguration($progressBar);
+
+            $this->advance($progressBar);
+
+            $this->info('Updated Base Package');
+        } else {
+            $this->info('Existing configuration was not overwritten');
         }
-
-        $progressBar->finish();
-        $this->line("");
-        $this->info('Updated Base Package');
     }
 
-    private function publishConfiguration($forcePublish = false, $progressBar)
+    private function publishConfiguration($progressBar)
     {
-        $params_config = [
-            //'--provider' => "Amaia\\Base\\BasePackageServiceProvider",
-            '--tag' => "amaia-base-config",
+
+        $this->advance($progressBar);
+        exec('bash vendor/amaiagalvez/base/base_files_projects/rmFiles.sh');
+
+        $params_update = [
+            '--tag' => "amaia-base-update",
+            '--force' => true
         ];
 
-        $params_files = [
-            '--tag' => "amaia-base-files",
-        ];
+        $this->advance($progressBar);
+        $this->call('vendor:publish', $params_update);
 
-        $params_tests = [
-            '--tag' => "amaia-base-tests",
-        ];
-
-        $params_stubs = [
-            '--tag' => "amaia-base-stubs",
-        ];
-
-        $params_config['--force'] = true;
-        $params_files['--force'] = true;
-        $params_tests['--force'] = true;
-        $params_stubs['--force'] = true;
-
-        $progressBar->advance();
-        $this->line("");
-        $this->call('vendor:publish', $params_files);
-        $progressBar->advance();
-        $this->line("");
-        if (config('app.env') == 'local') {
-            $this->info('Remove files');
-            exec('bash rmFiles.sh');
-            exec('rm tests/Feature/*');
-        }
-        $progressBar->advance();
-        $this->line("");
-        $this->call('vendor:publish', $params_config);
-        $progressBar->advance();
-        $this->line("");
-        $this->call('vendor:publish', $params_tests);
-        $progressBar->advance();
-        $this->line("");
-        $this->call('vendor:publish', $params_stubs);
-
-        exec('rm -R public/css');
-        exec('rm -R public/js');
-        exec('rm composer.lock');
+        $this->advance($progressBar);
         exec('composer update');
-        $progressBar->advance();
-        $this->line("");
+
+        $this->advance($progressBar);
         $this->call('migrate');
+
+        $this->advance($progressBar);
         $this->call('db:seed');
 
+        $this->advance($progressBar);
+        $this->call('test');
+    }
+
+    private function shouldOverwriteConfig()
+    {
+        return $this->confirm(
+            'Config file already exists. Do you want to overwrite it?',
+            false
+        );
+    }
+
+    private function advance($progressBar)
+    {
+        $this->line("");
+        $this->line("");
         $progressBar->advance();
         $this->line("");
-        $this->call('test');
-        $progressBar->advance();
         $this->line("");
     }
 }
