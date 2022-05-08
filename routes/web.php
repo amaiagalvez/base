@@ -2,6 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/{locale}', function ($locale = null) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+
+    return back();
+})->where('locale', 'eu|es|en|fr');
+
 Route::get('/', function () {
 
     return redirect()->route('login');
@@ -13,7 +21,7 @@ Route::get('/packages', function () {
             'image' => asset('storage/images/logo.jpg'),
             'name' => 'Base',
             'description' => 'Pakete orokorra. Eskaintzen digu erabiltzaile eta rolen kudeaketa.',
-            'link' => '#'
+            'link' => route('base::packages.base')
         ],
         [
             'image' => asset('storage/images/code.jpg'),
@@ -83,5 +91,10 @@ Route::get('/packages', function () {
         ],
     ];
 
-    return view('base::packages', compact('packs'));
-})->name('packages');
+    return view('base::packages.index', compact('packs'));
+})->name('packages.index');
+
+
+Route::get('/packages/base', function () {
+    return view('base::packages.base');
+})->name('packages.base');

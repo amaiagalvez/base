@@ -4,26 +4,23 @@
         <x-jet-authentication-card-logo />
     </div>
 
-    <div
-        class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-1">
-        @if (Route::has('login'))
-            <div class="fixed top-0 right-0 px-6 py-4 sm:block">
-                @auth
-                    <a href="{{ route('base::dashboard') }}"
-                        class="text-sm text-gray-700 dark:text-gray-500 underline">{{ __('Dashboard') }}</a>
-                @else
-                    <a href="{{ route('login') }}"
-                        class="text-sm text-gray-700 dark:text-gray-500 underline">
-                        {{ __('Log in') }}</a>
+    <div class="relative flex items-top justify-center min-h-screen  sm:items-center py-4 sm:pt-1">
+        <div class="fixed top-0 right-0 px-6 py-4 sm:block">
 
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                            class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">
-                            {{ __('Register') }}</a>
+            <div class="">
+                @foreach (config('app.available_locales') as $locale_name => $available_locale)
+                    @if ($available_locale === \App::getLocale())
+                        <span
+                            class="mr-2 text-fuchsia-500 font-extrabold underline underline-offset-4">{{ $locale_name }}</span>
+                    @else
+                        <a class="text-fuchsia-300 mr-2  font-bold"
+                            href="/{{ $available_locale }}">
+                            <span>{{ $locale_name }} </span>
+                        </a>
                     @endif
-                @endauth
+                @endforeach
             </div>
-        @endif
+        </div>
 
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
 
