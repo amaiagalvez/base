@@ -36,7 +36,7 @@ class BaseRouteServiceProvider extends ServiceProvider
     protected function testRoutes()
     {
         Route::middleware('web')
-            ->prefix('bas')
+            ->prefix('test')
             ->name('base::')
             ->group(__DIR__ . '/../routes/_test.php');
     }

@@ -21,13 +21,13 @@
             $nav_links = [
                 [
                     'name' => __('Home'),
-                    'route' => route('base::home'),
-                    'active' => request()->routeIs('base::home'),
+                    'route' => route('base::test.home'),
+                    'active' => request()->routeIs('base::test.home'),
                 ],
                 [
                     'name' => __('Test'),
-                    'route' => route('base::test'),
-                    'active' => request()->routeIs('base::test'),
+                    'route' => route('base::test.cards'),
+                    'active' => request()->routeIs('base::test.cards'),
                 ],
                 [
                     'name' => __('Theme'),
@@ -46,7 +46,7 @@
                     <div class="flex">
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
-                            <a href="{{ route('base::home') }}">
+                            <a href="{{ route('base::test.home') }}">
                                 <img src="{{ asset('storage/images/logo.jpg') }}" alt="Amaia"
                                     width="50%" height="auto" class="block">
                             </a>

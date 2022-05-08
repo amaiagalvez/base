@@ -81,6 +81,8 @@ sudo apt install php-cli php-xml php-curl unzip
 
     >>>>> red messages!!
 
+    php artisan storage:link
+    
     > Docker: Compose up - Services - Profiles (npm) 
 
     commit => base package install   

@@ -10,7 +10,7 @@
             <div class="fixed top-0 right-0 px-6 py-4 sm:block">
                 @auth
                     <a href="{{ route('base::dashboard') }}"
-                        class="text-sm text-gray-700 dark:text-gray-500 underline">{{ _('Dashboard') }}</a>
+                        class="text-sm text-gray-700 dark:text-gray-500 underline">{{ __('Dashboard') }}</a>
                 @else
                     <a href="{{ route('login') }}"
                         class="text-sm text-gray-700 dark:text-gray-500 underline">
@@ -40,7 +40,7 @@
                                     </div>
 
                                     <div class="ml-4 text-lg leading-7 font-semibold"><a
-                                            href="https://laravel.com/docs"
+                                            href="{{ $pack['link'] }}"
                                             class="text-gray-900 dark:text-white">{{ $pack['name'] }}</a>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                     </div>
 
                                     <div class="ml-4 text-lg leading-7 font-semibold"><a
-                                            href="https://laracasts.com"
+                                            href="{{ $pack['link'] }}"
                                             class="text-gray-900 dark:text-white">{{ $pack['name'] }}</a>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
                                     </div>
 
                                     <div class="ml-4 text-lg leading-7 font-semibold"><a
-                                            href="https://laravel-news.com/"
+                                            href="{{ $pack['link'] }}"
                                             class="text-gray-900 dark:text-white">{{ $pack['name'] }}</a>
                                     </div>
                                 </div>
@@ -107,9 +107,10 @@
                                             class="shadow-lg rounded-lg max-w-full h-auto align-middle border-none" />
                                     </div>
 
-                                    <div
-                                        class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white">
-                                        {{ $pack['name'] }}</div>
+                                    <div class="ml-4 text-lg leading-7 font-semibold"><a
+                                            href="{{ $pack['link'] }}"
+                                            class="text-gray-900 dark:text-white">{{ $pack['name'] }}</a>
+                                    </div>
                                 </div>
 
                                 <div class="ml-12">
