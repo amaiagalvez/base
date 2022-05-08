@@ -6,8 +6,6 @@ use Tests\TestCase;
 
 class MakeAllFilesTest extends TestCase
 {
-    /** @test */
-
     public function make_all_files_ok()
     {
         $this->artisan('make:allfiles -mcrfswtd Name')->assertExitCode(0);

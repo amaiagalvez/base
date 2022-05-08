@@ -6,6 +6,7 @@ use Livewire\Livewire;
 use Amaia\Base\Classes\Calculator;
 use Amaia\Base\View\Components\Card;
 use Illuminate\Support\Facades\Blade;
+use Amaia\Base\View\Components\NavLink;
 use Illuminate\Support\ServiceProvider;
 use Amaia\Base\View\Components\AppLayout;
 use Amaia\Base\View\Components\GuestLayout;
@@ -13,6 +14,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Sanctum\SanctumServiceProvider;
 use Amaia\Base\Providers\AuthServiceProvider;
 use Amaia\Base\Providers\FortifyServiceProvider;
+use Amaia\Base\View\Components\ResponsiveNavLink;
 use Amaia\Base\Console\Commands\UpdateBasePackage;
 use Amaia\Base\Providers\JetstreamServiceProvider;
 use Amaia\Base\Console\Commands\InstallBasePackage;
@@ -96,7 +98,13 @@ class BaseServiceProvider extends ServiceProvider
 
         Blade::component('app-layout', AppLayout::class);
         Blade::component('guest-layout', GuestLayout::class);
+
         Blade::component('card', Card::class);
+
+        //Jetstream Commponets (paketeen testak pasatzeko)
+
+        Blade::component('jet-nav-link', NavLink::class);
+        Blade::component('jet-responsive-nav-link', ResponsiveNavLink::class);
 
         // Livewire
 

@@ -12,7 +12,7 @@ Route::get('/{locale}', function ($locale = null) {
 
 Route::get('/', function () {
 
-    return redirect()->route('login');
+    return redirect()->to('bas/login');
 })->name('home');
 
 Route::get('/packages', function () {

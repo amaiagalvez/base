@@ -6,54 +6,67 @@ use Tests\TestCase;
 use Amaia\Base\Models\User;
 use Laravel\Sanctum\Sanctum;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Jetstream\Http\Livewire\NavigationMenu;
+use Livewire\Livewire;
 
 class ExampleTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function load_welcome_route_ok()
+    public function load_home_route_redirect_login_if_guest()
     {
-        //mix-manifest.json fitxategia bilatzen duelako
-        if (!file_exists(__DIR__ . '/../../../public/mix-manifest.json')) {
-            $this->app->instance('path.public', __DIR__ . '/../../..');
-        }
+        $response = $this->get(route('base::home'));
 
-        $response = $this->get(route('base::welcome'));
+        $response->assertStatus(302);
+        $response->assertRedirect('bas/login');
 
-        $response->assertStatus(200);
+        $this->assertGuest();
+    }
+
+    /** @test */
+    public function load_home_route_load_ok_if_auth()
+    {
+        $this->actingAs($user = User::factory()->withPersonalTeam()->create());
+
+        $response = $this->get(route('base::home'));
+
+        $response->assertStatus(302);
+        $response->assertRedirect('bas/login');
+
+        $this->assertAuthenticated();
+        $response->assertSessionHasNoErrors();
     }
 
     /** @test */
     public function load_dashboad_route_ok()
     {
-        $this->withoutExceptionHandling();
-        $this->withoutMiddleware();
+        setPathPublic($this->app);
 
-        $user = User::factory()->withPersonalTeam()->create();
+        $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
-        Sanctum::actingAs($user, ['*']);
-        $this->actingAs($user);
-
-        //mix-manifest.json fitxategia bilatzen duelako
-        if (!file_exists(__DIR__ . '/../../../public/mix-manifest.json')) {
-            $this->app->instance('path.public', __DIR__ . '/../../..');
-        }
-
-        $response = $this->get(route('base::dashboard'));
+        $response = $this->get('home');
 
         $response->assertStatus(200);
     }
 
     /** @test */
-    public function load_test_route_ok()
+    public function load_test_card_route_ok()
     {
-        //mix-manifest.json fitxategia bilatzen duelako
-        if (!file_exists(__DIR__ . '/../../../public/mix-manifest.json')) {
-            $this->app->instance('path.public', __DIR__ . '/../../..');
-        }
+        setPathPublic($this->app);
 
-        $response = $this->get(route('base::test'));
+        $response = $this->get(route('base::test.cards'));
+
+        $response->assertStatus(200);
+    }
+
+    /** @test */
+
+    public function load_test_home_route_ok()
+    {
+        setPathPublic($this->app);
+
+        $response = $this->get(route('base::test.home'));
 
         $response->assertStatus(200);
     }
