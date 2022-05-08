@@ -12,7 +12,6 @@ rm database/migrations/*
 rm -R resources/views/*
 rm -R resources/markdown
 rm stubs/*
-rm -R tests/Feature/Jeststream
 # larecipe vendor garbitu (berpublikatzeko)
 rm -R public/vendor/binarytorch
 rm -R resources/views/vendor/larecipe
@@ -22,5 +21,3 @@ rm -R resources/docs/eu/base
 rm -R resources/docs/es/base
 rm -R tests/Feature/base
 rm -R tests/Unit/base
-# Project .lock (composer exekutatzeko)
-rm composer.lock

@@ -55,7 +55,7 @@ services:
 
   xxxxx-npmdev:
     image: node:${DC_NODE:-17-bullseye}
-    profiles: [ "npm" ]
+    profiles: [ "npmdev" ]
     volumes:
       - ./:/app
       - ${HOME}/Dokumentuak/Packages:/packages

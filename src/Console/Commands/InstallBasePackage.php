@@ -47,6 +47,7 @@ class InstallBasePackage extends Command
 
                 $this->error("replace xxxxx => project name");
                 $this->error("RouteServiceProvider => HOME = '/bas/dashboard'");
+                $this->error("execute docker profile npm");
 
                 $this->info('Installed Base Package');
             } else {
@@ -66,6 +67,7 @@ class InstallBasePackage extends Command
     {
         $this->advance($progressBar);
         exec('bash vendor/amaiagalvez/base/base_files_projects/rmFiles.sh');
+        exec('rm -R tests/Feature/*');
 
         $params_install = [
             '--tag' => "amaia-base-install",
@@ -85,6 +87,7 @@ class InstallBasePackage extends Command
         $this->call('vendor:publish', $params_update);
 
         $this->advance($progressBar);
+        exec('rm composer.lock');
         exec('composer update');
 
         $this->advance($progressBar);
@@ -92,9 +95,6 @@ class InstallBasePackage extends Command
 
         $this->advance($progressBar);
         $this->call('db:seed');
-
-        $this->advance($progressBar);
-        $this->call('test');
 
         exec('bash vendor/amaiagalvez/base/base_files_projects/clean.sh');
     }

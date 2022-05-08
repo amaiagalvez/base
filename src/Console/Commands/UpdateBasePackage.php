@@ -66,6 +66,7 @@ class UpdateBasePackage extends Command
         $this->call('vendor:publish', $params_update);
 
         $this->advance($progressBar);
+        exec('rm composer.lock');
         exec('composer update');
 
         $this->advance($progressBar);

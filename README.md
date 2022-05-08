@@ -39,13 +39,22 @@ sudo apt install php-cli php-xml php-curl unzip
 ```
     git init
     git add .
-    git commit -am "laravel 9.2 + jetstream"
+    git commit -am "laravel 9.11 + jetstream"
     >>>> git push
 ```
 
 - **Docker**
 ```
     copy **docker-compose.yaml** && replace xxxxx => project name
+    copy .env.example => change URL && DB
+        APP_URL=http://localhost:8000
+
+        DB_CONNECTION=mysql
+        DB_HOST=db
+        DB_PORT=3306
+        DB_DATABASE=laravel
+        DB_USERNAME=laravel
+        DB_PASSWORD=laravel
     > Docker: Compose up
 ```
 
@@ -62,14 +71,7 @@ sudo apt install php-cli php-xml php-curl unzip
                 }
                 }
             ]    
-    .env config
-        DB_CONNECTION=mysql
-        DB_HOST=db
-        DB_PORT=3306
-        DB_DATABASE=laravel
-        DB_USERNAME=laravel
-        DB_PASSWORD=laravel
-
+ 
     laraveltest database and give grant permissions to laravel user
 
     > Docker: Compose up - Services - Profiles (composer) 
@@ -79,9 +81,9 @@ sudo apt install php-cli php-xml php-curl unzip
 
     >>>>> red messages!!
 
-    commit => base package install   
-
     > Docker: Compose up - Services - Profiles (npm) 
+
+    commit => base package install   
 
 ```
 
@@ -89,5 +91,9 @@ sudo apt install php-cli php-xml php-curl unzip
 
 ```
     php artisan amaia:base-update
+    => yes: copy config, composer, migrations, seeds && tests
+    => no: copy files (paketean npm egiten dugunerako)
+    
+    commit => base package update 
 
 ```
