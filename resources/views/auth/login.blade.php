@@ -48,7 +48,7 @@
     </x-jet-authentication-card>
 
     <div class="-mt-20">
-        <a href="{{ route('base::packages') }}">
+        <a href="{{ route('base::packages.index') }}">
             <img src="{{ asset('storage/images/tissue.jpg') }}" alt="Amaia"
                 class="w-20 h-auto mr-2 mb-5
                 rounded-full float-left">
